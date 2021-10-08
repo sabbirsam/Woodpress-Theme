@@ -43,7 +43,7 @@ if (class_exists('Kirki')) {
     Kirki::add_field(WOODPRESS_CUSROMIZER_CONFIG_ID, [
         'type'        => 'switch',
         'settings'    => 'woodpress_Top_enable', //use it as condition
-        'label'       => esc_html__('Enable Top Mail', 'woodpress'),
+        'label'       => esc_html__('Enable Top Header', 'woodpress'),
         'section'     => 'woodpress_header_topmenu_id',
         'default'     => 'on',
         'priority'    => 10,
@@ -152,6 +152,42 @@ if (class_exists('Kirki')) {
     ] );
 
 
+    Kirki::add_field(WOODPRESS_CUSROMIZER_CONFIG_ID, [
+        'type'     => 'text',
+        'settings' => 'woodpress_header_phone_number',
+        'label'    => esc_html__('Top Head Phone Number', 'woodpress'),
+        'section'  => 'woodpress_header_topmenu_id',
+        'default'  => esc_html__('+65 11.188.888', 'woodpress'),
+        'priority' => 10,
+
+        'active_callback' => [
+            [
+                'setting'=>'woodpress_Top_enable',
+                'operator' =>'==',
+                'value'=> true,
+            ]
+        ]
+
+    ]);
+
+
+    Kirki::add_field(WOODPRESS_CUSROMIZER_CONFIG_ID, [
+        'type'     => 'text',
+        'settings' => 'woodpress_header_support_text',
+        'label'    => esc_html__('Top Head Support text', 'woodpress'),
+        'section'  => 'woodpress_header_topmenu_id',
+        'default'  => esc_html__('support 24/7 time', 'woodpress'),
+        'priority' => 10,
+
+        'active_callback' => [
+            [
+                'setting'=>'woodpress_Top_enable',
+                'operator' =>'==',
+                'value'=> true,
+            ]
+        ]
+
+    ]);
     
 
 

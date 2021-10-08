@@ -25,6 +25,8 @@ function woodpress_theme_setup(){
     
     add_theme_support( "title-tag" );
 
+    // add_theme_support( 'custom-logo' );
+
     add_theme_support( 'html5', array( 'search-form','comment-list','comment-form','gallery', 'caption' ) );
 
     add_theme_support( "post-formats", array('aside', 'image', 'video', 'quote', 'link', 'gallery', 'status', 'audio', 'chat') );
@@ -35,8 +37,29 @@ function woodpress_theme_setup(){
 
     add_image_size( "woodpress-home-square", 400, 400, true );
 
+
+    $defaults = array(
+            'height'               => 100,
+            'width'                => 400,
+            'flex-height'          => true,
+            'flex-width'           => true,
+            'header-text'          => array( 'site-title', 'site-description' ),
+            'unlink-homepage-logo' => true, 
+        );
+     
+    add_theme_support( 'custom-logo', $defaults );
+
+
+
 }
 add_action( "after_setup_theme", "woodpress_theme_setup");
+
+
+
+
+ 
+
+
 
 
 /**
@@ -182,4 +205,5 @@ add_action('pre_get_posts', 'advanced_search_query_demo', 1000);
 /**
  * End
  */
+
 

@@ -61,7 +61,12 @@ $defaults = [
             <div class="row">
                 <div class="col-lg-3">
                     <div class="header__logo">
-                        <a href="./index.html"><img src="<?php echo get_template_directory_uri();?>/assets/img/logo.png" alt=""></a>
+                      
+                        <?php 
+                        if ( function_exists( 'woodpress_theme_setup' ) ) {
+                            the_custom_logo();
+                        }
+                        ?>
                     </div>
                 </div>
                 <div class="col-lg-6">
