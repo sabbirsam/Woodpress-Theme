@@ -73,8 +73,11 @@ $defaults = [
         </div>
         <div class="humberger__menu__contact">
             <ul>
-                <li><i class="fa fa-envelope"></i> <?php echo get_theme_mod( 'woodpress_header_top_mail', __( 'hello@colorlib.com', 'woodpress' ) ) ?></li>
-                <li><?php echo get_theme_mod( 'woodpress_top_slogan', __( 'Free Shipping for all Order of $89', 'woodpress' ) ) ?></li>
+                <li><i class="fa fa-envelope"></i>
+                    <?php echo get_theme_mod( 'woodpress_header_top_mail', __( 'hello@colorlib.com', 'woodpress' ) ) ?>
+                </li>
+                <li><?php echo get_theme_mod( 'woodpress_top_slogan', __( 'Free Shipping for all Order of $89', 'woodpress' ) ) ?>
+                </li>
             </ul>
         </div>
     </div>
@@ -86,63 +89,13 @@ $defaults = [
 
     <!-- Header Top Header Section End -->
 
-
-
     <!-- Hero Section Begin -->
-    <section class="hero">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3">
-                    <div class="hero__categories">
-                        <div class="hero__categories__all">
-                            <i class="fa fa-bars"></i>
-                            <span>All departments</span>
-                        </div>
 
-                        <?php 
-                        if(class_exists('woocommerce')):
-                        $orderby = 'name';
-                        $order = 'asc';
-                        $hide_empty = false ;
-                        $cat_args = array(
-                            'orderby'    => $orderby,
-                            'order'      => $order,
-                            'hide_empty' => $hide_empty,
-                        );
+    <?php 
+        if(is_page_template("page-templates/homepage.php")){ 
+            get_template_part( "template-parts/common/homepage-header" );    
+    ?>
 
-                        $product_categories = get_terms( 'product_cat', $cat_args );
-                        if( !empty($product_categories) ):
 
-                        ?>
-                        <ul>
-                            <?php foreach ($product_categories as $key => $category) :  ?>
-                            <li><a href="<?php echo esc_attr( $category->slug ); ?>"><?php echo esc_html( $category->name ); ?></a></li>
-                            <?php endforeach; ?>
-                        </ul>
-                        <?php endif; endif;  ?>
-
-                    </div>
-                </div>
-                <div class="col-lg-9">
-                    <div class="hero__search">
-                        <div class="hero__search__form">
-                            <form action="#">
-                                <div class="hero__search__categories">
-                                    <?php _e( "All Categories", "woodpress")?>
-                                    <span class="arrow_carrot-down"></span>
-                                </div>
-                                <input type="text" placeholder="<?php _e( "What do yo u need?", "woodpress")?>">
-                                <button type="submit" class="site-btn"><?php _e( "SEARCH", "woodpress")?></button>
-                            </form>
-                        </div>
-                        <div class="hero__search__phone">
-                            <div class="hero__search__phone__icon">
-                                <i class="fa fa-phone"></i>
-                            </div>
-                            <div class="hero__search__phone__text">
-                                <h5><?php echo get_theme_mod( 'woodpress_header_phone_number', __( '+65 11.188.888', 'woodpress' ) ) ?>
-                                </h5>
-                                <span><?php echo get_theme_mod( 'woodpress_header_support_text', __( 'support 24/7 time', 'woodpress' ) ) ?></span>
-                            </div>
-                        </div>
-                    </div>
+    <?php } else{get_template_part( "template-parts/common/blog-header" ); } ?>
+    

@@ -25,7 +25,7 @@ function woodpress_theme_setup(){
     
     add_theme_support( "title-tag" );
 
-    // add_theme_support( 'custom-logo' );
+    add_theme_support( 'woocommerce' );
 
     add_theme_support( 'html5', array( 'search-form','comment-list','comment-form','gallery', 'caption' ) );
 
@@ -36,6 +36,7 @@ function woodpress_theme_setup(){
     register_nav_menu( "headermenu", __("Header Menu", "woodpress") );
 
     add_image_size( "woodpress-home-square", 400, 400, true );
+    add_image_size( "woodpress-popular-square", 360, 259, true );
 
 
     $defaults = array(
@@ -92,6 +93,7 @@ wp_enqueue_script( 'woodpress-owl.carousel-min-js',get_theme_file_uri( '/assets/
 wp_enqueue_script( 'woodpress-main-js',get_theme_file_uri( '/assets/js/main.js'),array('jquery'),VERSION,true);
 
 
+wp_enqueue_script( 'woodpress-darkmode-js',get_theme_file_uri( '/assets/js/darkmode-js.min.js'),array('jquery'),VERSION,true);
 wp_enqueue_script( 'woodpress-js',get_theme_file_uri( '/assets/js/woodpress.js'),array('jquery'),VERSION,true);
 
 
@@ -207,3 +209,211 @@ add_action('pre_get_posts', 'advanced_search_query_demo', 1000);
  */
 
 
+/**
+ * breadcrumb style fix
+ */
+
+function woodpress_woocommerce_breadcrumbs() {
+    return array(
+            'delimiter'   => '', //&#47;
+            'wrap_before' => '<span class="breadcrumb__option" itemprop="breadcrumb">',
+            'wrap_after'  => '</span>',
+            'before'      => '',
+            'after'       => '',
+            'home'        => _x( 'Home', 'breadcrumb', 'woocommerce' ),
+        );
+}
+add_filter( 'woocommerce_breadcrumb_defaults', 'woodpress_woocommerce_breadcrumbs', 20 );
+
+
+/**
+ * Blog Pagination
+ */
+function woodpress_pagination()
+{
+    global $wp_query;
+    $links=  paginate_links(array(
+       'current' => max(1, get_query_var('paged')),
+       'total' => $wp_query->max_num_pages,
+       'mid_size'=>3
+    ));
+
+    $links = str_replace("page-numbers", 'sam', $links);  
+    
+    echo $links;
+}
+
+/**
+ *  blog page social icon
+ */
+
+ if( function_exists('acf_add_local_field_group') ):
+
+    acf_add_local_field_group(array(
+        'key' => 'group_61503c6a5b178',
+        'title' => 'Social From',
+        'fields' => array(
+            array(
+                'key' => 'field_61503c77481b7',
+                'label' => 'Facebook',
+                'name' => 'facebook',
+                'type' => 'url',
+                'instructions' => '',
+                'required' => 0,
+                'conditional_logic' => 0,
+                'wrapper' => array(
+                    'width' => '',
+                    'class' => '',
+                    'id' => '',
+                ),
+                'default_value' => '',
+                'placeholder' => '',
+            ),
+            array(
+                'key' => 'field_61503c84481b8',
+                'label' => 'Instagram',
+                'name' => 'instagram',
+                'type' => 'url',
+                'instructions' => '',
+                'required' => 0,
+                'conditional_logic' => 0,
+                'wrapper' => array(
+                    'width' => '',
+                    'class' => '',
+                    'id' => '',
+                ),
+                'default_value' => '',
+                'placeholder' => '',
+            ),
+            array(
+                'key' => 'field_61503c93481b9',
+                'label' => 'Twitter',
+                'name' => 'twitter',
+                'type' => 'url',
+                'instructions' => '',
+                'required' => 0,
+                'conditional_logic' => 0,
+                'wrapper' => array(
+                    'width' => '',
+                    'class' => '',
+                    'id' => '',
+                ),
+                'default_value' => '',
+                'placeholder' => '',
+            ),
+        ),
+        'location' => array(
+            array(
+                array(
+                    'param' => 'user_form',
+                    'operator' => '==',
+                    'value' => 'all',
+                ),
+            ),
+        ),
+        'menu_order' => 0,
+        'position' => 'normal',
+        'style' => 'default',
+        'label_placement' => 'top',
+        'instruction_placement' => 'label',
+        'hide_on_screen' => '',
+        'active' => true,
+        'description' => '',
+    ));
+    
+    endif;
+    
+    
+// end 
+
+/**
+ * Comment
+ */
+function woodpress_comment($comment, $args, $depth)
+{
+    if ('div' === $args['style']) {
+        $tag       = 'div';
+        $add_below = 'comment';
+    } else {
+        $tag       = 'li';
+        $add_below = 'div-comment';
+    } ?>
+
+    <<?php echo $tag; ?> <?php comment_class(empty($args['has_children']) ? '' : 'parent'); ?> id="comment-<?php comment_ID() ?>"><?php
+    if ('div' != $args['style']) { ?>
+        <div id="div-comment-<?php comment_ID() ?>" class="comment-body"><?php
+    } ?>
+    
+
+            <div class="comment__avatar">
+                <?php
+                    if ($args['avatar_size'] != 0) {
+                        echo get_avatar($comment, $args['avatar_size']);
+                    } ?>
+             </div>
+             <div class="comment__content">
+                <div class="comment__info">
+                    <?php
+                        printf(__('<cite class="fn">%s</cite> <span class="says"> </span>'), get_comment_author_link()); ?>
+                </div>
+            </div>
+        <?php
+        if ($comment->comment_approved == '0') { ?>
+            <em class="comment-awaiting-moderation"><?php _e('Your comment is awaiting moderation.'); ?></em><br/><?php
+        } ?>
+        <div class="comment-meta commentmetadata">
+            <time class="comment__time">
+            
+                <?php
+                    /* translators: 1: date, 2: time */
+                    printf(
+                        // __('%1$s at %2$s'),
+                        get_comment_date(),
+                        get_comment_time()
+                    ); ?>
+           </time><?php
+            edit_comment_link(__('(Edit)'), '  ', ''); ?>
+            <a class="reply"> 
+            
+            <?php
+                comment_reply_link(
+                        array_merge(
+                            $args,
+                            array(
+                            'add_below' => $add_below,
+                            'depth'     => $depth,
+                            'max_depth' => $args['max_depth']
+                        )
+                        )
+                    ); ?></a>
+        </div>
+
+        <div class="comment__text">
+        <?php comment_text(); ?>            
+        </div>
+ 
+        
+        <?php
+        if ('div' != $args['style']) : ?>
+            </div>
+        <?php
+        endif;
+}
+
+/**
+ * Search Form on single post
+ */
+function woodpress_search_form($form)
+{
+    $home_dir = home_url( "/" );
+    $label = _e( "Search...", "woodpress" );
+    $newform=<<<FORM
+<form role="search" method="get" action="{$home_dir}" >
+<input type="search" placeholder="{$label}" name="s">
+<button type="submit"><span class="icon_search"></span></button>
+</form>
+FORM;
+
+    return $newform;
+}
+add_filter("get_search_form", "woodpress_search_form");
