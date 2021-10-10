@@ -24,3 +24,23 @@ Tags: one-column, flexible-header, accessibility-ready, custom-colors, custom-me
     background: #7fad39;
     letter-spacing: 2px;
 }
+section.blog.spad {
+    margin-bottom: 42px;
+}
+
+.blog__item__text .blog__btn:hover{
+    color: #ffffff;
+    background: rgb(127, 173, 57);
+}
+.blog__sidebar__item__tags a:hover{
+    color: #ffffff;
+    background: rgb(127, 173, 57);
+}
+
+.footer__widget ul li a:hover{
+    color: rgb(127, 173, 57);
+    
+}
+.blog__item__text h5 a:hover{
+    color: rgb(127, 173, 57);
+}

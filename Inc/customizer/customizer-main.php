@@ -372,6 +372,113 @@ if (class_exists('Kirki')) {
      */
 
 
+
+     /**
+      * Footer 
+      */
+
+   
+      Kirki::add_section('woodwoodpress_footer_id', array( //section id
+        'title'          => esc_html__('Footer Menu Settings', 'woodpress'),
+        'panel'          => WOODPRESS_CUSROMIZER_PANEL_ID,
+        'priority'       => 160,
+        
+    ));
+
+
+    Kirki::add_field(WOODPRESS_CUSROMIZER_CONFIG_ID, [
+        'type'        => 'switch',
+        'settings'    => 'woodpress_footer_enable', //use it as condition
+        'label'       => esc_html__('Enable Footer Newsletter', 'woodpress'),
+        'section'     => 'woodwoodpress_footer_id',
+        'default'     => 'on',
+        'priority'    => 10,
+        'choices'     => [
+            'on'  => esc_html__('Display', 'woodpress'),
+            'off' => esc_html__('Hide', 'woodpress'),
+        ],
+    ]);
+
+
+
+    Kirki::add_field(WOODPRESS_CUSROMIZER_CONFIG_ID, [
+        'type'     => 'text',
+        'settings' => 'woodpress_footer_newsletter',
+        'label'    => esc_html__('Newsletter Title', 'woodpress'),
+        'section'  => 'woodwoodpress_footer_id',
+        'default'  => esc_html__('Join Our Newsletter Now', 'woodpress'),
+        'priority' => 10,
+
+        'active_callback' => [
+            [
+                'setting'=>'woodpress_footer_enable',
+                'operator' =>'==',
+                'value'=> true,
+            ]
+        ]
+
+    ]);
+
+
+
+    Kirki::add_field(WOODPRESS_CUSROMIZER_CONFIG_ID, [
+        'type'     => 'text',
+        'settings' => 'woodpress_footer_newsletter_slogan',
+        'label'    => esc_html__('Newsletter slogan', 'woodpress'),
+        'section'  => 'woodwoodpress_footer_id',
+        'default'  => esc_html__('Get E-mail updates about our latest shop and special offers.', 'woodpress'),
+        'priority' => 10,
+
+        'active_callback' => [
+            [
+                'setting'=>'woodpress_footer_enable',
+                'operator' =>'==',
+                'value'=> true,
+            ]
+        ]
+
+    ]);
+
+
+
+    Kirki::add_field(WOODPRESS_CUSROMIZER_CONFIG_ID, [
+        'type'     => 'text',
+        'settings' => 'woodpress_footer_copyright',
+        'label'    => esc_html__('Copyright Section', 'woodpress'),
+        'section'  => 'woodwoodpress_footer_id',
+        'default'  => esc_html__('Copyright ©2021 All rights reserved | This website is made with  by ₪ Sabbir Sam', 'woodpress'),
+        'priority' => 10,
+
+        'active_callback' => [
+            [
+                'setting'=>'woodpress_footer_enable',
+                'operator' =>'==',
+                'value'=> true,
+            ]
+        ]
+
+    ]);
+
+
+    Kirki::add_field(WOODPRESS_CUSROMIZER_CONFIG_ID, [
+        'type'        => 'image',
+        'settings'    => 'woodpress_footer_payment_image',
+        'label'       => esc_html__('Footer payment banner Image', 'woodpress'),
+        'description' => esc_html__('set your payment logo image.', 'woodpress'),
+        'section'     => 'woodwoodpress_footer_id',
+        'default'     => '',
+        
+        
+        'active_callback' => [
+            [
+                'setting'=>'woodpress_footer_enable',
+                'operator' =>'==',
+                'value'=> true,
+            ]
+        ]
+    ]);
+
+
     
 
 

@@ -406,10 +406,9 @@ function woodpress_comment($comment, $args, $depth)
 function woodpress_search_form($form)
 {
     $home_dir = home_url( "/" );
-    $label = _e( "Search...", "woodpress" );
     $newform=<<<FORM
 <form role="search" method="get" action="{$home_dir}" >
-<input type="search" placeholder="{$label}" name="s">
+<input type="search" placeholder="Search..." name="s">
 <button type="submit"><span class="icon_search"></span></button>
 </form>
 FORM;
@@ -417,3 +416,31 @@ FORM;
     return $newform;
 }
 add_filter("get_search_form", "woodpress_search_form");
+
+
+/**
+ * Sidebar
+ */
+function woodpress_about_widget()
+{
+    register_sidebar(array(
+        'name'          => __('Footer Address', 'woodpress'),
+        'id'            => 'footer_address_page',
+        'description'   => 'Footer Address displaying Footer Section.',
+        'before_widget' => '<div id="%1$s" class="%2$s">',
+        'after_widget'  => '</div>',
+        'before_title'  => '<h3 class="">',
+        'after_title'   => '</h3>',
+    ));
+    register_sidebar(array(
+        'name'          => __('Footer Useful Links', 'woodpress'),
+        'id'            => 'footer_useful_link',
+        'description'   => 'Links  displaying Footer Section.',
+        'before_widget' => '<div id="%1$s" class="%2$s">',
+        'after_widget'  => '</div>',
+        'before_title'  => '<h3 class="">',
+        'after_title'   => '</h3>',
+    ));
+}
+
+add_action('widgets_init', 'woodpress_about_widget');
