@@ -2,8 +2,12 @@
 /**
  * Kirki
  */
+
+require_once(get_theme_file_path("/inc/tgm.php" ));
+
 include_once("inc/customizer/class-kirki-installer-section.php");
 include_once("inc/customizer/customizer-main.php");
+
 
 
 /**
@@ -54,13 +58,6 @@ function woodpress_theme_setup()
 add_action("after_setup_theme", "woodpress_theme_setup");
 
 
-
-
- 
-
-
-
-
 /**
  * Enqueue
  */
@@ -76,7 +73,7 @@ function woodpress_assets()
     wp_enqueue_style('woodpress-owl.carousel-min-css', get_theme_file_uri('/assets/css/owl.carousel.min.css'), null, VERSION);
     wp_enqueue_style('woodpress-slicknav-min-css', get_theme_file_uri('/assets/css/slicknav.min.css'), null, VERSION);
     wp_enqueue_style('woodpress-style-css', get_theme_file_uri('/assets/css/style.css'), null, VERSION);
-
+   
 
     wp_enqueue_style("woodpress-css", get_stylesheet_uri(), null, VERSION); // add main css
 
@@ -554,4 +551,3 @@ add_action('widgets_init', 'woodpress_about_widget');
 //     <div class="product__item__text">';
 // }
 // add_filter("woocommerce_shop_loop_item_title", "woodpress_shop_loop_item_title");
-
