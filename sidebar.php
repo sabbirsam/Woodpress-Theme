@@ -1,3 +1,10 @@
+<?php 
+if (class_exists('woocommerce') && is_shop() ){
+    get_template_part( "woo-sidebar" );
+} 
+else{
+?>
+
 <div class="blog__sidebar">
     <div class="blog__sidebar__search">
 
@@ -16,7 +23,7 @@
                 'orderby'    => $orderby,
                 'order'      => $order,
                 'hide_empty' => $hide_empty,
-                            
+                         
                             
             );
 
@@ -27,7 +34,8 @@
 
         <ul>
             <?php foreach ($product_categories as $key => $category) :  ?>
-            <li><a href="<?php echo esc_attr( $category->slug ); ?>"><?php echo esc_html( $category->name.'('.$category->count.')' ); ?></a>
+            <li><a
+                    href="<?php echo esc_attr( $category->slug ); ?>"><?php echo esc_html( $category->name.'('.$category->count.')' ); ?></a>
             </li>
             <?php endforeach; ?>
         </ul>
@@ -36,7 +44,7 @@
     <div class="blog__sidebar__item">
         <h4><?php _e( "Recent News", "woodpress")?></h4>
         <div class="blog__sidebar__recent">
-        <?php
+            <?php
 $args = array(
     'numberposts' => 4,
     'offset' => 0,
@@ -59,19 +67,22 @@ foreach ($recent_posts as $post ):
                     <h6><?php echo $post["post_title"]; ?></h6>
                     <span><?php echo $post["post_date"];?></span>
                 </div>
-               
+
                 <?php endforeach;  ?>
             </a>
             <?php 
             wp_reset_query();
             ?>
-            
+
         </div>
     </div>
     <div class="blog__sidebar__item">
         <h4><?php _e( "Search By", "woodpress")?></h4>
         <div class="blog__sidebar__item__tags">
-           <?php echo get_the_tag_list();?>
+            <?php echo get_the_tag_list();?>
         </div>
     </div>
 </div>
+
+<?php
+ } ?>

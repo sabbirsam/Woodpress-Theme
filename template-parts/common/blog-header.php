@@ -47,6 +47,7 @@
                             <button type="submit" class="site-btn"><?php _e( "SEARCH", "woodpress")?></button>
                         </form>
                     </div>
+                    
                     <div class="hero__search__phone">
                         <div class="hero__search__phone__icon">
                             <i class="fa fa-phone"></i>

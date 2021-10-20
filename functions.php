@@ -9,34 +9,35 @@ include_once("inc/customizer/customizer-main.php");
 /**
  * Version
  */
-if( site_url() == "http://localhost/sam/Theme_1/"){
-    define( "VERSION" , time());
-}else{
-    define( "VERSION" , wp_get_theme()->get( "VERSION" ));
+if (site_url() == "http://localhost/sam/Theme_1/") {
+    define("VERSION", time());
+} else {
+    define("VERSION", wp_get_theme()->get("VERSION"));
 }
 
 /**
  * Theme Support
  */
-function woodpress_theme_setup(){
-    load_theme_textdomain( "woodpress" );
+function woodpress_theme_setup()
+{
+    load_theme_textdomain("woodpress");
     
-    add_theme_support( "post-thumbnails" );
+    add_theme_support("post-thumbnails");
     
-    add_theme_support( "title-tag" );
+    add_theme_support("title-tag");
 
-    add_theme_support( 'woocommerce' );
+    // add_theme_support('woocommerce');
 
-    add_theme_support( 'html5', array( 'search-form','comment-list','comment-form','gallery', 'caption' ) );
+    add_theme_support('html5', array( 'search-form','comment-list','comment-form','gallery', 'caption' ));
 
-    add_theme_support( "post-formats", array('aside', 'image', 'video', 'quote', 'link', 'gallery', 'status', 'audio', 'chat') );
+    add_theme_support("post-formats", array('aside', 'image', 'video', 'quote', 'link', 'gallery', 'status', 'audio', 'chat'));
 
-    add_editor_style( "/assets/css/editor-style.css" );  
+    add_editor_style("/assets/css/editor-style.css");
 
-    register_nav_menu( "headermenu", __("Header Menu", "woodpress") );
+    register_nav_menu("headermenu", __("Header Menu", "woodpress"));
 
-    add_image_size( "woodpress-home-square", 400, 400, true );
-    add_image_size( "woodpress-popular-square", 360, 259, true );
+    add_image_size("woodpress-home-square", 400, 400, true);
+    add_image_size("woodpress-popular-square", 360, 259, true);
 
 
     $defaults = array(
@@ -45,15 +46,12 @@ function woodpress_theme_setup(){
             'flex-height'          => true,
             'flex-width'           => true,
             'header-text'          => array( 'site-title', 'site-description' ),
-            'unlink-homepage-logo' => true, 
+            'unlink-homepage-logo' => true,
         );
      
-    add_theme_support( 'custom-logo', $defaults );
-
-
-
+    add_theme_support('custom-logo', $defaults);
 }
-add_action( "after_setup_theme", "woodpress_theme_setup");
+add_action("after_setup_theme", "woodpress_theme_setup");
 
 
 
@@ -64,103 +62,102 @@ add_action( "after_setup_theme", "woodpress_theme_setup");
 
 
 /**
- * Enqueue 
+ * Enqueue
  */
-function woodpress_assets(){
+function woodpress_assets()
+{
+    wp_enqueue_style('woodpress-googleapis-css', get_theme_file_uri('/assets/fonts/main-css2.css'), null, VERSION);
 
-wp_enqueue_style( 'woodpress-googleapis-css',get_theme_file_uri( '/assets/fonts/main-css2.css'),null,VERSION);
-
-wp_enqueue_style( 'woodpress-bootstrap-min-css',get_theme_file_uri( '/assets/css/bootstrap.min.css'),null,VERSION);
-wp_enqueue_style( 'woodpress-font-awesome-min-css',get_theme_file_uri( '/assets/css/font-awesome.min.css'),null,VERSION);
-wp_enqueue_style( 'woodpress-elegant-icons-css',get_theme_file_uri( '/assets/css/elegant-icons.css'),null,VERSION);
-wp_enqueue_style( 'woodpress-nice-select-css',get_theme_file_uri( '/assets/css/nice-select.css'),null,VERSION);
-wp_enqueue_style( 'woodpress-jquery-ui-min-css',get_theme_file_uri( '/assets/css/jquery-ui.min.css'),null,VERSION);
-wp_enqueue_style( 'woodpress-owl.carousel-min-css',get_theme_file_uri( '/assets/css/owl.carousel.min.css'),null,VERSION);
-wp_enqueue_style( 'woodpress-slicknav-min-css',get_theme_file_uri( '/assets/css/slicknav.min.css'),null,VERSION);
-wp_enqueue_style( 'woodpress-style-css',get_theme_file_uri( '/assets/css/style.css'),null,VERSION);
-
-
-wp_enqueue_style( "woodpress-css",get_stylesheet_uri(), null, VERSION ); // add main css
+    wp_enqueue_style('woodpress-bootstrap-min-css', get_theme_file_uri('/assets/css/bootstrap.min.css'), null, VERSION);
+    wp_enqueue_style('woodpress-font-awesome-min-css', get_theme_file_uri('/assets/css/font-awesome.min.css'), null, VERSION);
+    wp_enqueue_style('woodpress-elegant-icons-css', get_theme_file_uri('/assets/css/elegant-icons.css'), null, VERSION);
+    wp_enqueue_style('woodpress-nice-select-css', get_theme_file_uri('/assets/css/nice-select.css'), null, VERSION);
+    wp_enqueue_style('woodpress-jquery-ui-min-css', get_theme_file_uri('/assets/css/jquery-ui.min.css'), null, VERSION);
+    wp_enqueue_style('woodpress-owl.carousel-min-css', get_theme_file_uri('/assets/css/owl.carousel.min.css'), null, VERSION);
+    wp_enqueue_style('woodpress-slicknav-min-css', get_theme_file_uri('/assets/css/slicknav.min.css'), null, VERSION);
+    wp_enqueue_style('woodpress-style-css', get_theme_file_uri('/assets/css/style.css'), null, VERSION);
 
 
-
-wp_enqueue_script( 'woodpress-bootstrap-min-js',get_theme_file_uri( '/assets/js/bootstrap.min.js'),array('jquery'),VERSION,true);
-wp_enqueue_script( 'woodpress-jquery-nice-select-min-js',get_theme_file_uri( '/assets/js/jquery.nice-select.min.js'),array('jquery'),VERSION,true);
-wp_enqueue_script( 'woodpress-jquery-ui-min-js',get_theme_file_uri( '/assets/js/jquery-ui.min.js'),array('jquery'),VERSION,true);
-wp_enqueue_script( 'woodpress-jquery-slicknav-js',get_theme_file_uri( '/assets/js/jquery.slicknav.js'),array('jquery'),VERSION,true);
-wp_enqueue_script( 'woodpress-mixitup-min-js',get_theme_file_uri( '/assets/js/mixitup.min.js'),array('jquery'),VERSION,true);
-wp_enqueue_script( 'woodpress-owl.carousel-min-js',get_theme_file_uri( '/assets/js/owl.carousel.min.js'),array('jquery'),VERSION,true);
-wp_enqueue_script( 'woodpress-main-js',get_theme_file_uri( '/assets/js/main.js'),array('jquery'),VERSION,true);
-
-
-wp_enqueue_script( 'woodpress-darkmode-js',get_theme_file_uri( '/assets/js/darkmode-js.min.js'),array('jquery'),VERSION,true);
-wp_enqueue_script( 'woodpress-js',get_theme_file_uri( '/assets/js/woodpress.js'),array('jquery'),VERSION,true);
+    wp_enqueue_style("woodpress-css", get_stylesheet_uri(), null, VERSION); // add main css
 
 
 
+    wp_enqueue_script('woodpress-bootstrap-min-js', get_theme_file_uri('/assets/js/bootstrap.min.js'), array('jquery'), VERSION, true);
+    wp_enqueue_script('woodpress-jquery-nice-select-min-js', get_theme_file_uri('/assets/js/jquery.nice-select.min.js'), array('jquery'), VERSION, true);
+    wp_enqueue_script('woodpress-jquery-ui-min-js', get_theme_file_uri('/assets/js/jquery-ui.min.js'), array('jquery'), VERSION, true);
+    wp_enqueue_script('woodpress-jquery-slicknav-js', get_theme_file_uri('/assets/js/jquery.slicknav.js'), array('jquery'), VERSION, true);
+    wp_enqueue_script('woodpress-mixitup-min-js', get_theme_file_uri('/assets/js/mixitup.min.js'), array('jquery'), VERSION, true);
+    wp_enqueue_script('woodpress-owl.carousel-min-js', get_theme_file_uri('/assets/js/owl.carousel.min.js'), array('jquery'), VERSION, true);
+    wp_enqueue_script('woodpress-main-js', get_theme_file_uri('/assets/js/main.js'), array('jquery'), VERSION, true);
+
+
+    wp_enqueue_script('woodpress-darkmode-js', get_theme_file_uri('/assets/js/darkmode-js.min.js'), array('jquery'), VERSION, true);
+    wp_enqueue_script('woodpress-js', get_theme_file_uri('/assets/js/woodpress.js'), array('jquery'), VERSION, true);
 }
-add_action( "wp_enqueue_scripts", "woodpress_assets" );
+add_action("wp_enqueue_scripts", "woodpress_assets");
 
 
 /**
  * Navigation Menu walker
  */
-class WPDocs_Walker_Nav_Menu extends Walker_Nav_Menu {
- 
-
-    function start_lvl( &$output, $depth = 0, $args = array() ) {
+class WPDocs_Walker_Nav_Menu extends Walker_Nav_Menu
+{
+    public function start_lvl(&$output, $depth = 0, $args = array())
+    {
         // Depth-dependent classes.
-        $indent = ( $depth > 0  ? str_repeat( "\t", $depth ) : '' ); // code indent
-        $display_depth = ( $depth + 1); // because it counts the first submenu as 0
+        $indent = ($depth > 0  ? str_repeat("\t", $depth) : ''); // code indent
+        $display_depth = ($depth + 1); // because it counts the first submenu as 0
         $classes = array(
             'sub-menu',
-            ( $display_depth % 2  ? 'header__menu__dropdown' : 'menu-even' ), //ul class here
-            ( $display_depth >=2 ? 'sub-sub-menu' : '' ),
+            ($display_depth % 2  ? 'header__menu__dropdown' : 'menu-even'), //ul class here
+            ($display_depth >=2 ? 'sub-sub-menu' : ''),
             'menu-depth-' . $display_depth
         );
-        $class_names = implode( ' ', $classes );
+        $class_names = implode(' ', $classes);
  
         // Build HTML for output.
         $output .= "\n" . $indent . '<ul class="' . $class_names . '">' . "\n";
     }
 
-    function start_el( &$output, $item, $depth = 0, $args = array(), $id = 0 ) {
+    public function start_el(&$output, $item, $depth = 0, $args = array(), $id = 0)
+    {
         global $wp_query;
-        $indent = ( $depth > 0 ? str_repeat( "\t", $depth ) : '' ); // code indent
+        $indent = ($depth > 0 ? str_repeat("\t", $depth) : ''); // code indent
  
         // Depth-dependent classes.
         $depth_classes = array(
-            ( $depth == 0 ? 'sam-first-li' : 'sub-menu-item' ),
-            ( $depth >=2 ? 'sub-sub-menu-item' : '' ),
-            ( $depth % 2 ? 'menu-item-odd' : 'menu-item-even' ),
+            ($depth == 0 ? 'sam-first-li' : 'sub-menu-item'),
+            ($depth >=2 ? 'sub-sub-menu-item' : ''),
+            ($depth % 2 ? 'menu-item-odd' : 'menu-item-even'),
             'menu-item-depth-' . $depth
         );
-        $depth_class_names = esc_attr( implode( ' ', $depth_classes ) );
+        $depth_class_names = esc_attr(implode(' ', $depth_classes));
  
         // Passed classes.
-        $classes = empty( $item->classes ) ? array() : (array) $item->classes;
-        $class_names = esc_attr( implode( ' ', apply_filters( 'nav_menu_css_class', array_filter( $classes ), $item ) ) );
+        $classes = empty($item->classes) ? array() : (array) $item->classes;
+        $class_names = esc_attr(implode(' ', apply_filters('nav_menu_css_class', array_filter($classes), $item)));
  
         // Build HTML.
         $output .= $indent . '<li id="nav-menu-item-'. $item->ID . '" class="' . $depth_class_names . ' ' . $class_names . '">';
  
         // Link attributes.
-        $attributes  = ! empty( $item->attr_title ) ? ' title="'  . esc_attr( $item->attr_title ) .'"' : '';
-        $attributes .= ! empty( $item->target )     ? ' target="' . esc_attr( $item->target     ) .'"' : '';
-        $attributes .= ! empty( $item->xfn )        ? ' rel="'    . esc_attr( $item->xfn        ) .'"' : '';
-        $attributes .= ! empty( $item->url )        ? ' href="'   . esc_attr( $item->url        ) .'"' : '';
-        $attributes .= ' class="menu-link ' . ( $depth > 0 ? '2nd-ul-sub-menu-link' : 'sam-first-li-menu-link' ) . '"';
+        $attributes  = ! empty($item->attr_title) ? ' title="'  . esc_attr($item->attr_title) .'"' : '';
+        $attributes .= ! empty($item->target)     ? ' target="' . esc_attr($item->target) .'"' : '';
+        $attributes .= ! empty($item->xfn)        ? ' rel="'    . esc_attr($item->xfn) .'"' : '';
+        $attributes .= ! empty($item->url)        ? ' href="'   . esc_attr($item->url) .'"' : '';
+        $attributes .= ' class="menu-link ' . ($depth > 0 ? '2nd-ul-sub-menu-link' : 'sam-first-li-menu-link') . '"';
  
         // Build HTML output and pass through the proper filter.
-        $item_output = sprintf( '%1$s<a%2$s>%3$s%4$s%5$s</a>%6$s',
+        $item_output = sprintf(
+            '%1$s<a%2$s>%3$s%4$s%5$s</a>%6$s',
             $args->before,
             $attributes,
             $args->link_before,
-            apply_filters( 'the_title', $item->title, $item->ID ),
+            apply_filters('the_title', $item->title, $item->ID),
             $args->link_after,
             $args->after
         );
-        $output .= apply_filters( 'walker_nav_menu_start_el', $item_output, $item, $depth, $args );
+        $output .= apply_filters('walker_nav_menu_start_el', $item_output, $item, $depth, $args);
     }
 }
 
@@ -169,9 +166,9 @@ class WPDocs_Walker_Nav_Menu extends Walker_Nav_Menu {
 /**
  * Search
  */
-function advanced_search_query($query) {
-
-    if($query->is_search()) {
+function advanced_search_query($query)
+{
+    if ($query->is_search()) {
 
         // your extra param is: in_category // &in_category=sample-category
         if (isset($_GET['in_category'])) {
@@ -180,17 +177,15 @@ function advanced_search_query($query) {
 
         return $query;
     }
-
 }
 add_action('pre_get_posts', 'advanced_search_query', 1000);
 
 
 
-function advanced_search_query_demo($query) {
-
-    if($query->is_search()) {
+function advanced_search_query_demo($query)
+{
+    if ($query->is_search()) {
         if (isset($_GET['in_category'])) {
-
             $query->set('tax_query', array(array(
                 'taxonomy' => 'product_cat',
                 'field' => 'slug',
@@ -200,7 +195,6 @@ function advanced_search_query_demo($query) {
 
         return $query;
     }
-
 }
 add_action('pre_get_posts', 'advanced_search_query_demo', 1000);
 
@@ -213,17 +207,19 @@ add_action('pre_get_posts', 'advanced_search_query_demo', 1000);
  * breadcrumb style fix
  */
 
-function woodpress_woocommerce_breadcrumbs() {
+
+function woodpress_woocommerce_breadcrumbs()
+{
     return array(
             'delimiter'   => '', //&#47;
             'wrap_before' => '<span class="breadcrumb__option" itemprop="breadcrumb">',
             'wrap_after'  => '</span>',
             'before'      => '',
             'after'       => '',
-            'home'        => _x( 'Home', 'breadcrumb', 'woocommerce' ),
+            'home'        => _x('Home', 'breadcrumb', 'woocommerce'),
         );
 }
-add_filter( 'woocommerce_breadcrumb_defaults', 'woodpress_woocommerce_breadcrumbs', 20 );
+add_filter('woocommerce_breadcrumb_defaults', 'woodpress_woocommerce_breadcrumbs', 20);
 
 
 /**
@@ -238,16 +234,22 @@ function woodpress_pagination()
        'mid_size'=>3
     ));
 
-    $links = str_replace("page-numbers", 'sam', $links);  
+    $links = str_replace("page-numbers", 'sam', $links);
     
     echo $links;
 }
 
 /**
+ * woo pagination
+ */
+
+
+
+/**
  *  blog page social icon
  */
 
- if( function_exists('acf_add_local_field_group') ):
+ if (function_exists('acf_add_local_field_group')):
 
     acf_add_local_field_group(array(
         'key' => 'group_61503c6a5b178',
@@ -324,7 +326,9 @@ function woodpress_pagination()
     endif;
     
     
-// end 
+// end
+
+
 
 /**
  * Comment
@@ -339,31 +343,32 @@ function woodpress_comment($comment, $args, $depth)
         $add_below = 'div-comment';
     } ?>
 
-    <<?php echo $tag; ?> <?php comment_class(empty($args['has_children']) ? '' : 'parent'); ?> id="comment-<?php comment_ID() ?>"><?php
+<<?php echo $tag; ?> <?php comment_class(empty($args['has_children']) ? '' : 'parent'); ?>
+    id="comment-<?php comment_ID() ?>"><?php
     if ('div' != $args['style']) { ?>
-        <div id="div-comment-<?php comment_ID() ?>" class="comment-body"><?php
+    <div id="div-comment-<?php comment_ID() ?>" class="comment-body"><?php
     } ?>
-    
 
-            <div class="comment__avatar">
-                <?php
+
+        <div class="comment__avatar">
+            <?php
                     if ($args['avatar_size'] != 0) {
                         echo get_avatar($comment, $args['avatar_size']);
                     } ?>
-             </div>
-             <div class="comment__content">
-                <div class="comment__info">
-                    <?php
+        </div>
+        <div class="comment__content">
+            <div class="comment__info">
+                <?php
                         printf(__('<cite class="fn">%s</cite> <span class="says"> </span>'), get_comment_author_link()); ?>
-                </div>
             </div>
+        </div>
         <?php
         if ($comment->comment_approved == '0') { ?>
-            <em class="comment-awaiting-moderation"><?php _e('Your comment is awaiting moderation.'); ?></em><br/><?php
+        <em class="comment-awaiting-moderation"><?php _e('Your comment is awaiting moderation.'); ?></em><br /><?php
         } ?>
         <div class="comment-meta commentmetadata">
             <time class="comment__time">
-            
+
                 <?php
                     /* translators: 1: date, 2: time */
                     printf(
@@ -371,11 +376,11 @@ function woodpress_comment($comment, $args, $depth)
                         get_comment_date(),
                         get_comment_time()
                     ); ?>
-           </time><?php
+            </time><?php
             edit_comment_link(__('(Edit)'), '  ', ''); ?>
-            <a class="reply"> 
-            
-            <?php
+            <a class="reply">
+
+                <?php
                 comment_reply_link(
                         array_merge(
                             $args,
@@ -389,14 +394,14 @@ function woodpress_comment($comment, $args, $depth)
         </div>
 
         <div class="comment__text">
-        <?php comment_text(); ?>            
+            <?php comment_text(); ?>
         </div>
- 
-        
+
+
         <?php
         if ('div' != $args['style']) : ?>
-            </div>
-        <?php
+    </div>
+    <?php
         endif;
 }
 
@@ -405,7 +410,7 @@ function woodpress_comment($comment, $args, $depth)
  */
 function woodpress_search_form($form)
 {
-    $home_dir = home_url( "/" );
+    $home_dir = home_url("/");
     $newform=<<<FORM
 <form role="search" method="get" action="{$home_dir}" >
 <input type="search" placeholder="Search..." name="s">
@@ -441,6 +446,112 @@ function woodpress_about_widget()
         'before_title'  => '<h3 class="">',
         'after_title'   => '</h3>',
     ));
+
+    /**
+     * WOO
+     */
+    register_sidebar(array(
+        'name'          => __('WOOCOMMERCE Sidebar', 'woodpress'),
+        'id'            => 'woocommerce_list',
+        'description'   => 'Links  displaying Woocommerce sidebar Section.',
+        'before_widget' => '<div id="%1$s" class="%2$s">',
+        'after_widget'  => '</div>',
+        'before_title'  => '<h3 class="">',
+        'after_title'   => '</h3>',
+    ));
 }
 
 add_action('widgets_init', 'woodpress_about_widget');
+
+/**
+ * WOOCOMMERCE
+ */
+
+
+
+
+
+
+
+
+
+
+/**
+ * WOOCOMMERCE
+ */
+
+
+ /**
+  * show product per row 3
+  */
+// add_filter('loop_shop_columns', 'loop_columns', 999);
+// if (!function_exists('loop_columns')) {
+//     function loop_columns()
+//     {
+//         return 3; // 3 products per row
+//     }
+// }
+
+/**
+ * Remove the breadcrumbs 
+ */
+
+// remove_action( 'woocommerce_before_main_content', 'woocommerce_breadcrumb', 20, 0 );
+// remove_action( 'woocommerce_before_shop_loop', 'woocommerce_result_count', 20, 0 );
+// remove_action( 'woocommerce_before_shop_loop', 'woocommerce_catalog_ordering', 30, 0 );
+
+/**
+ * change sorting option
+ */
+// add_filter( 'woocommerce_catalog_orderby', 'custom_woocommerce_catalog_orderby' );
+// function custom_woocommerce_catalog_orderby( $sortby ) {
+// 	$sortby['menu_order'] = 'Default'; // C:\wamp64\www\sam\Theme_1\wp-content\plugins\woocommerce\includes\wc-template-functions.php
+//     unset($sortby['rating']);
+// 	return $sortby;
+// }
+
+
+
+  /**
+   * Remove woocommerce markup
+   */
+
+//    remove_action("woocommerce_before_shop_loop_item", "woocommerce_template_loop_product_link_open", 10); //remove sale flash
+   
+//    remove_action("woocommerce_before_shop_loop_item_title", "woocommerce_show_product_loop_sale_flash", 10); //remove sale flash
+
+//    remove_action("woocommerce_shop_loop_item_title", "woocommerce_template_loop_product_title", 10); //product title
+
+//    remove_action("woocommerce_after_shop_loop_item_title", "woocommerce_template_loop_rating", 5); //product rating
+//    remove_action("woocommerce_after_shop_loop_item_title", "woocommerce_template_loop_price", 10); //price
+
+//    remove_action("woocommerce_after_shop_loop_item", "woocommerce_template_loop_add_to_cart", 10); //add_to_cart
+
+
+   /**
+    * markup fix
+    */
+
+    
+// add_action("woocommerce_shop_loop_item_title", "woocommerce_template_loop_product_title", 10);
+
+// function woodpress_before_shop_loop_item()
+// {
+//     echo '<div class="product__item__pic set-bg">';
+// }
+// add_action("woocommerce_before_shop_loop_item", "woodpress_before_shop_loop_item");
+
+
+
+// add_action("woocommerce_before_shop_loop_item_title", "woocommerce_template_loop_add_to_cart", 10);
+
+// add_action("woocommerce_shop_loop_item_title", "woocommerce_template_loop_product_title", 11);
+// add_action("woocommerce_after_shop_loop_item_title", "woocommerce_template_loop_price", 10);
+
+// function woodpress_shop_loop_item_title()
+// {
+//     echo '</div>
+//     <div class="product__item__text">';
+// }
+// add_filter("woocommerce_shop_loop_item_title", "woodpress_shop_loop_item_title");
+

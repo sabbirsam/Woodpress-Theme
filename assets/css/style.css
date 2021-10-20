@@ -1106,8 +1106,9 @@ button.site-btn {
 	font-size: 16px;
 	color: #1c1c1c;
 	line-height: 39px;
-	display: block;
+	/* display: block; */
 }
+
 
 .sidebar__item .latest-product__text {
 	position: relative;

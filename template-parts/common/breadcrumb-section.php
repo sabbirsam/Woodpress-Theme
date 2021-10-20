@@ -5,9 +5,17 @@
                 <div class="col-lg-12 text-center">
                    
                     <div class="breadcrumb__text">
-                        <h2><?php _e( "BLOG", "woodpress" )?></h2> 
+                        <!-- <h2>BLOG</h2>  -->
+                        <h2><?php 
+                        $CurPageURL = $_SERVER['REQUEST_URI'];  
+                        // echo $CurPageURL;  
+                        $rest = substr($CurPageURL, 13, -1);
+                        echo strtoupper($rest);
+                        
+                        ?></h2> 
+
                         <div class="breadcrumb__option">
-                        <?php woocommerce_breadcrumb(); ?>
+                        <?php  if (class_exists('woocommerce')): woocommerce_breadcrumb(); endif; ?>
                       
                         </div>
                     </div>

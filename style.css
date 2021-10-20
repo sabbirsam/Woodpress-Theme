@@ -44,3 +44,46 @@ section.blog.spad {
 .blog__item__text h5 a:hover{
     color: rgb(127, 173, 57);
 }
+
+
+/**
+*Woocommerce Fix 
+*/
+.product__item__pic__hover li a i {
+    margin-top: 11px;
+}
+
+section.blog.spad {
+    margin-top: 100px;
+}
+
+.blog__details__text {
+    margin-top: 100px;
+}
+
+
+
+/* .product__item__pic__hover li {
+    margin-bottom: -9px;
+    transition: all, 0.5s;
+}
+
+.product__item__pic.set-bg:hover > .product__item__pic__hover li { 
+    margin-bottom: 50px;
+    transition: all, 0.6s;
+    transform: rotate(0);
+    
+}
+
+.woocommerce ul.products li.product .price
+{
+    margin: 0;
+    color: #111111;
+    font-weight: 400;
+    font-family: "Cairo", sans-serif;
+}
+
+.filter__sort span {
+    font-size: 15px;
+}
+ */

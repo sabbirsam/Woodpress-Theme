@@ -10,7 +10,7 @@
             <div class="row">
                 <div class="col-lg-4 col-md-5">
 
-                <?php get_template_part( "sidebar" );?>
+                <?php get_sidebar(); ?>
 
                     <!-- sidebar  -->
                 </div>
