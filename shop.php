@@ -75,7 +75,7 @@ echo "Shop page ";
                                                     </ul>',
                                                     
                                                     esc_url( $product->add_to_cart_url() ),
-                                                    esc_attr( isset( $args['quantity'] ) ? $args['quantity'] : 1 ),
+                                                    esc_attr( isset( $args['quantity'] ) ? $args['quantity'] : 1 )
                                                     
                                                 ),
                                                 $product,
