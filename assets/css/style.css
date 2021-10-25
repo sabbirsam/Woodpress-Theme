@@ -1541,7 +1541,7 @@ button.site-btn {
 }
 
 .product__item__pic {
-	height: 270px;
+	/* height: 270px; */
 	position: relative;
 	overflow: hidden;
 }
@@ -1665,9 +1665,9 @@ button.site-btn {
   Shop Details
 -----------------------*/
 
-.product-details {
+/* .product-details {
 	padding-top: 80px;
-}
+} */
 
 .product__details__pic__item {
 	margin-bottom: 20px;

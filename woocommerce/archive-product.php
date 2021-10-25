@@ -1,19 +1,28 @@
 <?php
-echo "Shop page ";
 
- get_header();
+defined('ABSPATH') || exit;
+
+get_header('shop');
+
 ?>
-<!-- header end  -->
-<?php get_template_part( "template-parts/common/breadcrumb-section" );?>
+
+<?php get_template_part("template-parts/common/breadcrumb-section");?>
+<!-- Breadcrumb Section End -->
 
 <section class="product spad">
     <div class="container">
         <div class="row">
+
             <div class="col-lg-3 col-md-5">
-                <div class="sidebar">
-                    <?php get_sidebar(); ?>
-                </div>
+                <?php
+                
+                // get_sidebar();
+                do_action('woocommerce_sidebar');
+                
+                ?>
+
             </div>
+
             <div class="col-lg-9 col-md-7">
                 <div class="product__discount">
                     <div class="section-title product__discount__title">
@@ -82,11 +91,7 @@ echo "Shop page ";
                                                 $args
                                             );
                                             ?>
-                                        <!-- <ul class="product__item__pic__hover">
-                                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                            </ul> -->
+
 
                                     </div>
                                     <div class="product__discount__item__text">
@@ -95,7 +100,9 @@ echo "Shop page ";
                                                 href="<?php echo get_permalink()?>"><?php echo esc_html( get_the_title() ); ?></a>
                                         </h5>
                                         <div class="product__item__price">
-                                            <?php echo "$". $sale_price.".00"; ?><span><?php echo "$". $product->get_regular_price(). ".00"; ?></span>
+                                            
+                                            <?php echo get_woocommerce_currency_symbol() . $sale_price.".00"; ?><span><?php echo get_woocommerce_currency_symbol(). $product->get_regular_price(). ".00"; ?></span>
+                        
                                         </div>
                                     </div>
                                 </div>
@@ -105,25 +112,20 @@ echo "Shop page ";
 							endwhile;
 							wp_reset_query();
 						    ?>
-
-
                         </div>
                     </div>
                 </div>
+
                 <div class="filter__item">
                     <div class="row">
                         <div class="col-lg-4 col-md-5">
                             <div class="filter__sort">
-                                <span>Sort By</span>
-                                <select>
-                                    <option value="0">Default</option>
-                                    <option value="0">Default</option>
-                                </select>
+                                <span>Sort By<?php woocommerce_catalog_ordering(); ?></span>
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-4">
                             <div class="filter__found">
-                                <h6><span>16</span> Products found</h6>
+                                <h6><?php woocommerce_result_count(); ?></h6>
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-3">
@@ -133,40 +135,60 @@ echo "Shop page ";
                             </div>
                         </div>
                     </div>
+                </div>     
+<?php
+
+if ( woocommerce_product_loop() ) {
+
+	woocommerce_product_loop_start();
+
+	if ( wc_get_loop_prop( 'total' ) ) {
+		while ( have_posts() ) {
+			the_post();
+
+			/**
+			 * Hook: woocommerce_shop_loop.
+			 */
+			do_action( 'woocommerce_shop_loop' );
+
+			wc_get_template_part( 'content', 'product' );
+		}
+	}
+
+	woocommerce_product_loop_end();
+
+	/**
+	 * Hook: woocommerce_after_shop_loop.
+	 *
+	 * @hooked woocommerce_pagination - 10
+	 */
+	do_action( 'woocommerce_after_shop_loop' );
+    
+} else {
+	/**
+	 * Hook: woocommerce_no_products_found.
+	 *
+	 * @hooked wc_no_products_found - 10
+	 */
+	do_action( 'woocommerce_no_products_found' );
+}
+
+/**
+ * Hook: woocommerce_after_main_content.
+ *
+ * @hooked woocommerce_output_content_wrapper_end - 10 (outputs closing divs for the content)
+ */
+do_action( 'woocommerce_after_main_content' );
+
+
+
+?>
+
                 </div>
-                <div class="row">
-                 
-                    <?php echo do_shortcode( '[products per_page="12" columns="3" paginate="true"]' ); ?>
-                    
-
-
-                    <!-- <div class="col-lg-4 col-md-6 col-sm-6">
-                            <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="<?php echo get_template_directory_uri();?>/assets/img/product/product-12.jpg">
-                                    <ul class="product__item__pic__hover">
-                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product__item__text">
-                                    <h6><a href="#">Crab Pool Security</a></h6>
-                                    <h5>$30.00</h5>
-                                </div>
-                            </div>
-                        </div> -->
-
-                </div>
-                <!-- <div class="product__pagination">
-                    <a href="#">1</a>
-                    <a href="#">2</a>
-                    <a href="#">3</a>
-                    <a href="#"><i class="fa fa-long-arrow-right"></i></a>
-                </div> -->
             </div>
         </div>
     </div>
 </section>
-<!-- Product Section End -->
+<?php
 
-<?php get_footer(); ?>
+get_footer('shop');

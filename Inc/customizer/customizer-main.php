@@ -479,7 +479,66 @@ if (class_exists('Kirki')) {
     ]);
 
 
-    
+      /**
+      * Banner Show
+      */
+
+      Kirki::add_section('woodpress_homepage_banner_id', array( //section id
+        'title'          => esc_html__('Banner', 'woodpress'),
+        'panel'          => WOODPRESS_CUSROMIZER_PANEL_ID,
+        'priority'       => 160,
+        
+    ));
+
+    Kirki::add_field(WOODPRESS_CUSROMIZER_CONFIG_ID, [
+        'type'        => 'switch',
+        'settings'    => 'woodpress_banner_enable', //use it as condition
+        'label'       => esc_html__('Enable Banner', 'woodpress'),
+        'section'     => 'woodpress_homepage_banner_id',
+        'default'     => 'on',
+        'priority'    => 10,
+        'choices'     => [
+            'on'  => esc_html__('Display', 'woodpress'),
+            'off' => esc_html__('Hide', 'woodpress'),
+        ],
+    ]);
+
+
+    Kirki::add_field(WOODPRESS_CUSROMIZER_CONFIG_ID, [
+        'type'        => 'image',
+        'settings'    => 'woodpress_homepage_banner_image_one',
+        'label'       => esc_html__('Banner first Image', 'woodpress'),
+        'description' => esc_html__('set your banner for homepage.', 'woodpress'),
+        'section'     => 'woodpress_homepage_banner_id',
+        'default'     => '',
+        
+        
+        'active_callback' => [
+            [
+                'setting'=>'woodpress_banner_enable',
+                'operator' =>'==',
+                'value'=> true,
+            ]
+        ]
+    ]);
+
+    Kirki::add_field(WOODPRESS_CUSROMIZER_CONFIG_ID, [
+        'type'        => 'image',
+        'settings'    => 'woodpress_homepage_banner_image_two',
+        'label'       => esc_html__('Banner Second Image', 'woodpress'),
+        'description' => esc_html__('set your second banner for homepage.', 'woodpress'),
+        'section'     => 'woodpress_homepage_banner_id',
+        'default'     => '',
+        
+        
+        'active_callback' => [
+            [
+                'setting'=>'woodpress_banner_enable',
+                'operator' =>'==',
+                'value'=> true,
+            ]
+        ]
+    ]);
 
 
 

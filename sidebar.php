@@ -41,6 +41,7 @@ else{
         </ul>
         <?php endif; endif;  ?>
     </div>
+    
     <div class="blog__sidebar__item">
         <h4><?php _e( "Recent News", "woodpress")?></h4>
         <div class="blog__sidebar__recent">
