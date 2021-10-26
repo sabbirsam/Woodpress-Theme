@@ -180,8 +180,7 @@ do_action( 'woocommerce_before_cart' ); ?>
                             </div>
                         </div>
                 </div>
-
-                </form>
+               
             </div>
             <div class="col-lg-6">
                 <div class="shoping__continue">
@@ -190,19 +189,18 @@ do_action( 'woocommerce_before_cart' ); ?>
                         </h5>
 
                         <?php if ( wc_coupons_enabled() ) { ?>
-                        <div class="coupon">
-                            <input type="text" name="coupon_code" class="input-text" id="coupon_code" value=""
-                                placeholder="<?php esc_attr_e( 'Coupon code', 'woocommerce' ); ?>" />
-                            <button type="submit" class="button" name="apply_coupon"
-                                value="<?php esc_attr_e( 'Apply coupon', 'woocommerce' ); ?>"><?php esc_attr_e( 'Apply coupon', 'woocommerce' ); ?></button>
-                            <?php do_action( 'woocommerce_cart_coupon' ); ?>
-                        </div>
+                            <div class="coupon">
+                                <input type="text" name="coupon_code" class="input-text" id="coupon_code" value=""
+                                    placeholder="<?php esc_attr_e( 'Coupon code', 'woocommerce' ); ?>" />
+                                <button type="submit" class="button" name="apply_coupon"
+                                    value="<?php esc_attr_e( 'Apply coupon', 'woocommerce' ); ?>"><?php esc_attr_e( 'Apply coupon', 'woocommerce' ); ?></button>
+                                <?php do_action( 'woocommerce_cart_coupon' ); ?>
+                            </div>
                     </div>
                     <?php } ?>
                 </div>
-
-
             </div>
+            </form>
 
 
             <?php do_action( 'woocommerce_before_cart_collaterals' ); ?>

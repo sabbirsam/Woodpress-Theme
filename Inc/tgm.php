@@ -68,6 +68,23 @@ function woodpress_register_required_plugins() {
 		array(
 			'name'        => 'WooCommerce',
 			'slug'        => 'woocommerce',
+			'required' => true,
+		),
+
+		array(
+			'name'        => 'GTranslate',
+			'slug'        => 'gtranslate',
+			'required' => false,
+		),
+		
+		array(
+			'name'        => 'WP Google Maps',
+			'slug'        => 'wp-google-maps',
+			'required' => false,
+		),
+		array(
+			'name'        => 'WOOF - WooCommerce Products Filter',
+			'slug'        => 'woocommerce-products-filter',
 			'required' => false,
 		),
 
