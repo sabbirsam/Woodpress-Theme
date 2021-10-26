@@ -178,37 +178,37 @@ class WPDocs_Walker_Nav_Menu extends Walker_Nav_Menu
 /**
  * Search
  */
-function advanced_search_query($query)
-{
-    if ($query->is_search()) {
+// function advanced_search_query($query)
+// {
+//     if ($query->is_search()) {
 
-        // your extra param is: in_category // &in_category=sample-category
-        if (isset($_GET['in_category'])) {
-            $query->set('category_name', $_GET['in_category']);
-        }
+//         // your extra param is: in_category // &in_category=sample-category
+//         if (isset($_GET['in_category'])) {
+//             $query->set('category_name', $_GET['in_category']);
+//         }
 
-        return $query;
-    }
-}
-add_action('pre_get_posts', 'advanced_search_query', 1000);
+//         return $query;
+//     }
+// }
+// add_action('pre_get_posts', 'advanced_search_query', 1000);
 
 
 
-function advanced_search_query_demo($query)
-{
-    if ($query->is_search()) {
-        if (isset($_GET['in_category'])) {
-            $query->set('tax_query', array(array(
-                'taxonomy' => 'product_cat',
-                'field' => 'slug',
-                'terms' => array($_GET['in_category']) )
-            ));
-        }
+// function advanced_search_query_demo($query)
+// {
+//     if ($query->is_search()) {
+//         if (isset($_GET['in_category'])) {
+//             $query->set('tax_query', array(array(
+//                 'taxonomy' => 'product_cat',
+//                 'field' => 'slug',
+//                 'terms' => array($_GET['in_category']) )
+//             ));
+//         }
 
-        return $query;
-    }
-}
-add_action('pre_get_posts', 'advanced_search_query_demo', 1000);
+//         return $query;
+//     }
+// }
+// add_action('pre_get_posts', 'advanced_search_query_demo', 1000);
 
 
 /**
@@ -712,4 +712,26 @@ function woodpress_form_field(){
 
 add_action("wp_ajax_form_field", "woodpress_form_field"); 
 add_action("wp_ajax_nopriv_form_field", "woodpress_form_field");
+
+
+/**
+ * Search by cat
+ */
+// advanced search functionality
+
+function advanced_search_query($query) {
+    
+    if($query->is_search()) {
+        // category terms search.
+        if (isset($_GET['category']) && !empty($_GET['category'])) {
+            $query->set('tax_query', array(array(
+                'taxonomy' => 'product_cat',
+                'field' => 'slug',
+                'terms' => array($_GET['category']) )
+            ));
+        }    
+    }
+    return $query;
+}
+add_action('pre_get_posts', 'advanced_search_query', 1000);
 

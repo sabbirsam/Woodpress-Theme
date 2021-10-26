@@ -399,6 +399,27 @@ if (class_exists('Kirki')) {
         ],
     ]);
 
+    Kirki::add_field( WOODPRESS_CUSROMIZER_CONFIG_ID, [
+        'type'        => 'palette',
+        'settings'    => 'palette_setting',
+        'label'       => esc_html__( 'Palette Control', 'kirki' ),
+        'section'     => 'woodwoodpress_footer_id',
+        'default'     => 'light',
+        'priority'    => 10,
+        'choices'     => [
+            'light' => [
+                '#F3F6FA',
+                '#1c1c1c',
+                '#4DD0E1',
+            ],
+            'dark' => [
+                '#37474F',
+                '#FFFFFF',
+                '#F9A825',
+            ],
+        ],
+    ] );
+
 
 
     Kirki::add_field(WOODPRESS_CUSROMIZER_CONFIG_ID, [

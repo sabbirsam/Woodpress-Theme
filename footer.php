@@ -17,10 +17,26 @@ $defaults = [
  */
 
 $image = get_theme_mod( 'woodpress_footer_payment_image', 'woodpress' );
+
+/**
+ * Color
+ */
+$saved_palette = get_theme_mod( 'palette_setting', 'light' );
+if ( 'light' == $saved_palette ) {
+	$background   = '#ECEFF1';
+	$text_color   = '#333333';
+	$border_color = '#4DD0E1';
+} else if ( 'dark' == $saved_palette ) {
+	$background   = '#32aeed';
+	$text_color   = '#ffffff';
+	$border_color = '#F9A825';
+}
+$styles = "background-color:{$background}; color:{$text_color}; border-color:{$border_color};";
+
   
 ?>
 <!-- Footer Section Begin -->
-<footer class="footer spad">
+<footer class="footer spad" style="<?php echo esc_attr( $styles ); ?>">
     <div class="container">
         <div class="row">
             <div class="col-lg-3 col-md-6 col-sm-6">

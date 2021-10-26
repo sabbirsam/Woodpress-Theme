@@ -67,9 +67,29 @@ $defaults = [
                             ?>
 
                             </div>
+
+
+                            <?php 
+							if ( is_user_logged_in() ) {
+										?>
                             <div class="header__top__right__auth">
-                                <a href="<?php echo get_permalink( get_option('woocommerce_myaccount_page_id') ); ?>"><i class="fa fa-user"></i> Login</a>
+                                <a href="<?php echo get_permalink( get_option('woocommerce_myaccount_page_id') ); ?>"><i
+                                        class="fa fa-user"></i>My Account</a>
                             </div>
+                            <?php
+									} else {
+								
+										?>
+                            <div class="header__top__right__auth">
+                                <a href="<?php echo get_permalink( get_option('woocommerce_myaccount_page_id') ); ?>"><i
+                                        class="fa fa-user"></i> Login</a>
+                            </div>
+
+                            <?php
+									}
+							?>
+
+
                         </div>
                     </div>
                 </div>

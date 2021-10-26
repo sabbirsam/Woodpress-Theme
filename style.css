@@ -528,3 +528,19 @@ nav.woocommerce-MyAccount-navigation li {
     position: relative;
     top: 7px;
 }
+
+
+/* search by cat  */
+
+.hero__search__form form .hero__search__categories span {
+    position: unset;
+}
+
+select.woodpress_cat {
+    display: inline-flex!important;
+    border: none;
+}
+
+.nice-select {
+    border: none;
+}

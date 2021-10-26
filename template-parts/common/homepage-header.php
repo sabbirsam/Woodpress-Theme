@@ -10,6 +10,8 @@
 
                     <?php 
                         if(class_exists('woocommerce')):
+
+                        
                         $orderby = 'name';
                         $order = 'asc';
                         $hide_empty = false ;
@@ -24,9 +26,9 @@
 
                         ?>
                     <ul>
-                        <?php foreach ($product_categories as $key => $category) :  ?>
+                        <?php foreach ($product_categories as $key => $category) : ?>
                         <li><a
-                                href="<?php echo esc_attr( $category->slug ); ?>"><?php echo esc_html( $category->name ); ?></a>
+                                href="<?php echo esc_url( get_category_link( $category->term_id ) ); ?>"><?php echo esc_html( $category->name ); ?></a>
                         </li>
                         <?php endforeach; ?>
                     </ul>
@@ -38,14 +40,55 @@
             <div class="col-lg-9">
                 <div class="hero__search">
                     <div class="hero__search__form">
-                        <form action="#">
+                        <!-- <form action="#">
                             <div class="hero__search__categories">
                                 <?php _e( "All Categories", "woodpress")?>
                                 <span class="arrow_carrot-down"></span>
                             </div>
                             <input type="text" placeholder="<?php _e( "What do yo u need?", "woodpress")?>">
                             <button type="submit" class="site-btn"><?php _e( "SEARCH", "woodpress")?></button>
+                        </form> -->
+
+                        <form role="search" method="get" action="<?php echo get_permalink( wc_get_page_id( 'shop' ) ); ?>">
+                            <!-- With this hidden input you can define a specific post type. -->
+                            <input type="hidden" name="post_type" value="product" />
+                            <input name="s" type="text" placeholder="<?php _e( "What do yo u need?", "woodpress")?>" />
+
+                            <div class="hero__search__categories">
+                                <select class="woodpress_cat" name="category">
+                                    <!-- Insert here all option tags you want, with category slug as value -->
+
+                                    <?php 
+
+									$orderby = 'name';
+									$order = 'asc';
+									$hide_empty = false ;
+									$cat_args = array(
+										'orderby'    => $orderby,
+										'order'      => $order,
+										'hide_empty' => $hide_empty,
+									);
+
+									$product_categories = get_terms( 'product_cat', $cat_args );
+									if( !empty($product_categories) ){
+									
+										foreach ($product_categories as $key => $category) {
+											
+											?>
+											<option value="<?php echo esc_attr( $category->slug ); ?>"><?php echo esc_html( $category->name ); ?></option>
+										    
+											<?php
+										}
+							
+									}						
+									
+								?>
+
+                                </select>
+                            </div>
+                            <button type="submit" class="site-btn"><?php _e( "SEARCH", "woodpress")?></button>
                         </form>
+
                     </div>
                     <div class="hero__search__phone">
                         <div class="hero__search__phone__icon">
