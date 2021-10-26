@@ -26,7 +26,7 @@
                     <ul>
                         <?php foreach ($product_categories as $key => $category) :  ?>
                         <li><a
-                                href="<?php echo esc_attr( $category->slug ); ?>"><?php echo esc_html( $category->name ); ?></a>
+                                href="<?php echo esc_url( get_category_link( $category->term_id ) ); ?>"><?php echo esc_html( $category->name ); ?></a>
                         </li>
                         <?php endforeach; ?>
                     </ul>
