@@ -525,9 +525,15 @@ nav.woocommerce-MyAccount-navigation li {
 /* gtranslate  */
 
 .switcher.notranslate {
-    position: relative;
-    top: 7px;
+    position: absolute;
+    top: -15px;
+    right: 211px;
 }
+
+
+/* .header__top__right__language div {
+    width: 30px;
+} */
 
 
 /* search by cat  */
