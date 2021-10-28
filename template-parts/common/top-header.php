@@ -118,10 +118,11 @@ $defaults = [
                 <div class="col-lg-3">
                     <div class="header__cart">
                         <ul>
-                            <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                            <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+                            <li><a href=""><i class="fa fa-heart"></i> <span>1</span></a></li>
+                            
+                            <li><a href="<?php echo wc_get_cart_url() ?>"><i class="fa fa-shopping-bag"></i> <span><?php echo WC()->cart->get_cart_contents_count(); ?></span></a></li>
                         </ul>
-                        <div class="header__cart__price">item: <span>$150.00</span></div>
+                        <div class="header__cart__price">item: <span><?php echo get_woocommerce_currency_symbol() . WC()->cart->cart_contents_total ?></span></div>
                     </div>
                 </div>
             </div>

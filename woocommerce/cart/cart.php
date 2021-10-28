@@ -165,7 +165,7 @@ do_action( 'woocommerce_before_cart' ); ?>
                             <div class="col-lg-12">
                                 <div class="shoping__cart__btns">
 
-                                    <a href="#" class="primary-btn cart-btn">CONTINUE SHOPPING</a>
+                                    <a href="<?php echo wc_get_page_permalink( 'shop' );?>" class="primary-btn cart-btn">CONTINUE SHOPPING</a>
 
                                     <button type="submit" class="primary-btn cart-btn cart-btn-right" name="update_cart"
                                         value="<?php esc_attr_e( 'Update cart', 'woocommerce' ); ?>"><span
