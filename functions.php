@@ -735,3 +735,35 @@ function advanced_search_query($query) {
 }
 add_action('pre_get_posts', 'advanced_search_query', 1000);
 
+
+
+/**
+ * Register form
+ */
+
+//  add_action( "register_form", function(){
+   
+//      ?>
+        <!-- <label for="user_password"><?php _e('*Choose a password') ?><br />
+//         <input type="text" name="user_password" id="user_password" class="input" /></label> -->
+  
+
+      <?php
+//  } );
+
+//  error message 
+// function woodpress_check_fields( $errors, $sanitized_user_login, $user_email ) {
+ 
+//     if(empty($_POST['user_password'])){
+//         $errors->add( 'password_error', __( '<strong>ERROR</strong>: Password Required.', 'woodpress' ) );
+//         return $errors;
+//     }
+// }
+ 
+// add_filter( 'registration_errors', 'woodpress_check_fields', 10, 3 );
+
+
+
+         
+// add the filter 
+add_filter( 'show_password_fields', '__return_false', 999 );

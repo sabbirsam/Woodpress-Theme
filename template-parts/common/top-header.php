@@ -71,13 +71,15 @@ $defaults = [
 
                             <?php 
 							if ( is_user_logged_in() ) {
+                                
+                                $current_user = wp_get_current_user();
 										?>
                             <div class="header__top__right__auth">
                                 <a href="<?php echo get_permalink( get_option('woocommerce_myaccount_page_id') ); ?>"><i
-                                        class="fa fa-user"></i>My Account</a>
+                                        class="fas fas-user"><?php echo get_avatar( $current_user->user_email, 32 );?></i>My Account</a>  
                             </div>
                             <?php
-									} else {
+									} else { //echo get_avatar(get_the_author_meta("ID"));
 								
 										?>
                             <div class="header__top__right__auth">

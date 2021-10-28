@@ -550,3 +550,16 @@ select.woodpress_cat {
 .nice-select {
     border: none;
 }
+
+
+/* top header thumbnail */
+
+i.fas.fas-user img {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
+
+.woocommerce div.product form.cart .button {
+    margin-top: 27px;
+}
