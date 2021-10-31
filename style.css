@@ -564,3 +564,13 @@ i.fas.fas-user img {
 /* .woocommerce div.product form.cart .button {
     margin-top: 27px;
 } */
+
+.woocommerce div.product div.images .flex-control-thumbs {
+    margin: 2px;
+    padding: 10px;
+}
+
+.woocommerce div.product div.images .flex-control-thumbs li {
+    width: 18%;
+    margin: 4px;
+}

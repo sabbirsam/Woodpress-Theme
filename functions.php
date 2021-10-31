@@ -30,7 +30,13 @@ function woodpress_theme_setup()
     
     add_theme_support("title-tag");
 
+
+    
     add_theme_support('woocommerce');
+    add_theme_support('wc-product-gallery-zoom');
+    add_theme_support('wc-product-gallery-lightbox');
+    add_theme_support('wc-product-gallery-slider');
+
 
     add_theme_support('html5', array( 'search-form','comment-list','comment-form','gallery', 'caption' ));
 
@@ -735,3 +741,8 @@ function advanced_search_query($query) {
 }
 add_action('pre_get_posts', 'advanced_search_query', 1000);
 
+
+
+/**
+ * 
+ */
